@@ -6,6 +6,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import static java.lang.String.format;
 
 @Service
@@ -38,5 +42,22 @@ public class CustomerService {
         }if(request.address() !=null){
             customer.setAddress(request.address());
         }
+    }
+
+    public List<CustomerResponse> findAllCustomers() {
+        return repository.findAll().stream().map(mapper::fromCustomers).collect(Collectors.toList());
+    }
+
+    public Boolean existById(String id) {
+         return repository.findById(id).isPresent();
+    }
+
+    public CustomerResponse findById(String id) {
+        return repository.findById(id).map(mapper::fromCustomers).
+                orElseThrow(()->new CustomerNotFoundException(format("No Customer found with the ID :: %s",id)));
+    }
+
+    public void deleteCustomerById(String id) {
+         repository.deleteById(id);
     }
 }
