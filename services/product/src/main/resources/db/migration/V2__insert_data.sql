@@ -13,4 +13,4 @@ INSERT INTO product (id, name, description, available_quantity, price, category_
 VALUES (nextval('product_seq'), 'Rice Bag', '10kg basmati rice', 50, 899.00, 3);
 
 INSERT INTO product (id, name, description, available_quantity, price, category_id)
-VALUES (nextval('product_seq'), 'Face Cream', 'Moisturizing cream', 40, 299.00, 4);
+VALUES (nextval('product_seq'), 'Face Cream', 'Moisturizing cream', 40, 299.00,  4);
