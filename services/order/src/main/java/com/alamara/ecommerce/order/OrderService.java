@@ -6,6 +6,8 @@ import com.alamara.ecommerce.kafka.OrderConfirmation;
 import com.alamara.ecommerce.kafka.OrderProducer;
 import com.alamara.ecommerce.orderline.OrderLineRequest;
 import com.alamara.ecommerce.orderline.OrderLineService;
+import com.alamara.ecommerce.payment.PaymentClient;
+import com.alamara.ecommerce.payment.PaymentRequest;
 import com.alamara.ecommerce.product.ProductClient;
 import com.alamara.ecommerce.record.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
@@ -26,6 +28,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public @Nullable Integer createOrder(OrderRequest request) {
         //find customer exist or not
@@ -52,7 +55,14 @@ public class OrderService {
         }
 
         //send payment request
-        //todo start payment service
+        var paymentRequest=new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         //send the request to kafka producer for notification
         orderProducer.sendOrderConfirmation(
