@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Confirmation</title>
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background:#f4f6f9;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        .container{
+            max-width:650px;
+            margin:30px auto;
+            background:#fff;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 2px 8px rgba(0,0,0,.15);
+        }
+
+        .header{
+            background:#198754;
+            color:white;
+            padding:25px;
+            text-align:center;
+        }
+
+        .content{
+            padding:35px;
+            color:#444;
+            line-height:1.7;
+        }
+
+        .card{
+            background:#f8f9fa;
+            border-left:5px solid #198754;
+            padding:20px;
+            border-radius:5px;
+            margin-top:25px;
+        }
+
+        .card p{
+            margin:10px 0;
+        }
+
+        .footer{
+            text-align:center;
+            background:#f1f1f1;
+            padding:20px;
+            color:#666;
+            font-size:13px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Payment Successful</h1>
+    </div>
+    <div class="content">
+        <h2>Hello <span th:text="${customerName}">Customer</span>,</h2>
+        <p>
+            Thank you for your purchase.
+        </p>
+        <p>
+            We have successfully received your payment.
+        </p>
+        <div class="card">
+            <p>
+                <strong>Order Reference</strong><br>
+                <span th:text="${orderReference}"></span>
+            </p>
+            <p>
+                <strong>Amount Paid</strong><br>
+                ₹ <span th:text="${amount}"></span>
+            </p>
+            <p>
+                <strong>Status</strong><br>
+                Successful
+            </p>
+        </div>
+        <p>
+            Your order is now being processed. You will receive another email once it has been confirmed.
+        </p>
+        <p>
+            Thank you for shopping with <strong>Alamara E-Commerce</strong>.
+        </p>
+    </div>
+    <div class="footer">
+        © 2026 Alamara E-Commerce. All Rights Reserved.
+    </div>
+
+</div>
+
+</body>
+</html>

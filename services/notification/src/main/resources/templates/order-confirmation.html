@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+
+    <style>
+
+        body{
+            margin:0;
+            padding:0;
+            background:#f4f6f9;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        .container{
+            max-width:700px;
+            margin:30px auto;
+            background:white;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 2px 8px rgba(0,0,0,.15);
+        }
+
+        .header{
+            background:#0d6efd;
+            color:white;
+            padding:25px;
+            text-align:center;
+        }
+
+        .content{
+            padding:35px;
+            color:#444;
+        }
+
+        .summary{
+            background:#f8f9fa;
+            padding:20px;
+            border-radius:8px;
+            margin:25px 0;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#0d6efd;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        }
+
+        .footer{
+            background:#f1f1f1;
+            text-align:center;
+            padding:20px;
+            color:#666;
+            font-size:13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Order Confirmed</h1>
+    </div>
+
+    <div class="content">
+        <h2>Hello <span th:text="${customerName}">Customer</span>,</h2>
+        <p>
+            Thank you for placing your order.
+        </p>
+        <p>
+            We have received your order successfully.
+        </p>
+        <div class="summary">
+            <p>
+                <strong>Order Reference:</strong>
+                <span th:text="${orderReference}"></span>
+            </p>
+            <p>
+                <strong>Total Amount:</strong>
+                ₹ <span th:text="${totalAmount}"></span>
+            </p>
+        </div>
+        <h3>Items Ordered</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td>
+                    ₹ <span th:text="${product.price}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <p>
+            We are preparing your order for shipment.
+        </p>
+        <p>
+            You'll receive another email with tracking information once your order has been dispatched.
+        </p>
+        <p>
+            Thank you for choosing <strong>Alamara E-Commerce</strong>.
+        </p>
+    </div>
+    <div class="footer">
+        © 2026 Alamara E-Commerce. All Rights Reserved.
+    </div>
+
+</div>
+
+</body>
+</html>
