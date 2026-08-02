@@ -12,7 +12,6 @@ import com.alamara.ecommerce.product.ProductClient;
 import com.alamara.ecommerce.record.PurchaseRequest;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class OrderService {
     private final OrderProducer orderProducer;
     private final PaymentClient paymentClient;
 
-    public @Nullable Integer createOrder(OrderRequest request) {
+    public  Integer createOrder(OrderRequest request) {
         //find customer exist or not
         var customer = customerClient.findCustomerById(request.customerId()).
                 orElseThrow(()->new BusinessException("Cannot create order :: No Customer exist with the provided ID"));
@@ -78,11 +77,11 @@ public class OrderService {
         return order.getId();
     }
 
-    public @Nullable List<OrderResponce> findAll() {
+    public  List<OrderResponce> findAll() {
         return orderRepository.findAll().stream().map(mapper::fromOrder).collect(Collectors.toList());
     }
 
-    public @Nullable OrderResponce findById(Integer orderId) {
+    public  OrderResponce findById(Integer orderId) {
         return orderRepository.findById(orderId)
                 .map(mapper::fromOrder)
                 .orElseThrow(()->new EntityNotFoundException(String.format("No order Found with the Provided ID: %d",orderId)));

@@ -4,7 +4,6 @@ import com.alamara.ecommerce.product.exception.ProductPurchaseException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,12 +18,12 @@ public class ProductService {
     private final ProductRepository repository;
     private final ProductMapper mapper;
 
-    public @Nullable Integer createProduct(@Valid ProductRequest request) {
+    public  Integer createProduct(@Valid ProductRequest request) {
         var product= mapper.toProduct(request);
         return repository.save(product).getId();
     }
 
-    public @Nullable List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request) {
+    public  List<ProductPurchaseResponse> purchaseProducts(List<ProductPurchaseRequest> request) {
         var productIds=request.stream().map(ProductPurchaseRequest::productId).toList();
         var storedProduct=repository.findAllByIdInOrderById(productIds);
         if (productIds.size() != storedProduct.size()){
@@ -46,12 +45,12 @@ public class ProductService {
         return purchasedProducts;
     }
 
-    public @Nullable ProductResponse findById(Integer productId) {
+    public  ProductResponse findById(Integer productId) {
         return repository.findById(productId).map(mapper::toProductResponse).
                 orElseThrow(()-> new EntityNotFoundException("Product not found with the ID:: "+productId));
     }
 
-    public @Nullable List<ProductResponse> findAll() {
+    public  List<ProductResponse> findAll() {
         return repository.findAll().stream().map(mapper::toProductResponse).collect(Collectors.toList());
     }
 }

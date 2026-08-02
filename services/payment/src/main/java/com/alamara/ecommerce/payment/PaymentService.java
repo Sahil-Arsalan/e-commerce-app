@@ -4,7 +4,6 @@ import com.alamara.ecommerce.notification.NotificationProducer;
 import com.alamara.ecommerce.notification.PaymentNotificationRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,7 @@ public class PaymentService {
     private final PaymentMapper mapper;
     private final NotificationProducer notificationProducer;
 
-    public @Nullable Integer createPayment(@Valid PaymentRequest request) {
+    public Integer createPayment(@Valid PaymentRequest request) {
         Payment payment = repository.save(mapper.toPayment(request));
 
         notificationProducer.sendNotification(new PaymentNotificationRequest(

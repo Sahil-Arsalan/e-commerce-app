@@ -13,17 +13,16 @@ spring:
       bootstrap-servers: localhost:9092
       group-id: paymentGroup,orderGroup
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: '*'
-        spring.json.type.mapping: orderConfirmation:com.alamara.ecommerce.kafka.OrderConfirmation,paymentConfirmation:com.alamara.ecommerce.notification.PaymentNotificationRequest
-
+        spring.json.type.mapping: >
+          orderConfirmation:com.alamara.ecommerce.kafka.order.OrderConfirmation,
+          paymentConfirmation:com.alamara.ecommerce.kafka.payment.PaymentConfirmation
   mail:
     host: localhost
     port: 1025
-    username: sahil
-    password: sahil
     properties:
       mail:
         smtp:
@@ -37,3 +36,5 @@ spring:
 
 server:
   port: 8040
+
+debug: true

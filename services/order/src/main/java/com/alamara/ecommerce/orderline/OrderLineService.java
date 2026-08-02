@@ -1,7 +1,6 @@
 package com.alamara.ecommerce.orderline;
 
 import lombok.RequiredArgsConstructor;
-import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class OrderLineService {
         return repository.save(order).getId();
     }
 
-    public @Nullable List<OrderLineResponse> findAllByOrderId(Integer orderId) {
+    public  List<OrderLineResponse> findAllByOrderId(Integer orderId) {
         return repository.findAllByOrderId(orderId).stream().
                 map(mapper::toOrderLineResponse).
                 collect(Collectors.toList());

@@ -9,14 +9,13 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class OrderProducer {
 
     private final KafkaTemplate<String,OrderConfirmation> kafkaTemplate;
 
     public void sendOrderConfirmation(OrderConfirmation orderConfirmation){
-        log.info("sending order confirmation");
         Message<OrderConfirmation> message= MessageBuilder
                                             .withPayload(orderConfirmation)
                                             .setHeader(KafkaHeaders.TOPIC,"order-topic").build();

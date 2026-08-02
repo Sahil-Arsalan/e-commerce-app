@@ -5,7 +5,6 @@ import com.alamara.ecommerce.kafka.order.OrderConfirmation;
 import com.alamara.ecommerce.kafka.payment.PaymentConfirmation;
 import com.alamara.ecommerce.notification.Notification;
 import com.alamara.ecommerce.notification.NotificationRepository;
-import com.alamara.ecommerce.notification.NotificationType;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
